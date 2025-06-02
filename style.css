@@ -1,0 +1,145 @@
+body, html {
+  height: 80%;
+  margin: 0;
+  padding: 0;
+}
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 75px;
+  color: #444;
+  text-align: center;
+  line-height: 1.2;
+  letter-spacing: 2px;
+  margin-top: 100px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.difficulty-header {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: #555;
+  margin-top: 20px;
+  margin-bottom: 0;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.difficulty-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Make links look like buttons and remove default link styles */
+.difficulty-buttons a {
+  display: block;
+  width: 200px;
+  padding: 10px 30px;
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 8px;
+  border: 2px solid black;  /* default black border */
+  text-decoration: none;    /* remove underline */
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  color: black;             /* default text color */
+}
+
+#streak {
+  font-weight: bold;
+  color: orange;
+  font-size: 20px;
+  margin-top: 15px;
+  text-shadow: 1px 1px 2px #cc7a00;
+}
+
+/* Easy */
+.difficulty-buttons a.easy {
+  border-color: green;
+  color: green;
+}
+.difficulty-buttons a.easy:hover {
+  background-color: green;
+  color: black;
+}
+
+/* Normal */
+.difficulty-buttons a.normal {
+  border-color: gold;
+  color: gold;
+}
+.difficulty-buttons a.normal:hover {
+  background-color: gold;
+  color: black;
+}
+
+/* Hard */
+.difficulty-buttons a.hard {
+  border-color: red;
+  color: red;
+}
+.difficulty-buttons a.hard:hover {
+  background-color: red;
+  color: black;
+}
+
+/* Extreme */
+.difficulty-buttons a.extreme {
+  border-color: purple;
+  color: purple;
+}
+.difficulty-buttons a.extreme:hover {
+  background-color: purple;
+  color: black;
+}
+
+.answer-section {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.answer-section input {
+    padding: 10px;
+    width: 250px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+}
+
+.answer-section button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+.leaderboard-divider {
+  margin-bottom: 10px;
+  border: none;
+  border-top: 2px solid #ccc;
+  width: 80%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
