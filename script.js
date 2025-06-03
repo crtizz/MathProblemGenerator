@@ -44,64 +44,69 @@ function generateNormalProblem() {
 }
 
 function generateHardProblem() {
-  let num1 = Math.floor(Math.random() * 100) + 1;
-  let num2 = Math.floor(Math.random() * 12) + 1;  // smaller for multiplication/division balance
+  let num1 = Math.floor(Math.random() * 500) + 100;
+  let num2 = Math.floor(Math.random() * 300) + 50; 
   let rand = Math.random();
   let problemText = "";
 
-  if (rand < 0.5) {
-    // addition
+  if (rand < 0.4) {
     problemText = num1 + " + " + num2;
     correctAnswer = num1 + num2;
   } else if (rand < 0.8) {
-    // multiplication with smaller second number
-    problemText = num2 + " * " + num2;
-    correctAnswer = num2 * num2;
+    let mul = Math.floor(Math.random() * 20) + 5;
+    problemText = mul + " * " + mul;
+    correctAnswer = mul * mul;
   } else {
-    // subtraction
-    problemText = Math.max(num1, num2) + " - " + Math.min(num1, num2);
-    correctAnswer = Math.abs(num1 - num2);
+    let max = Math.max(num1, num2);
+    let min = Math.min(num1, num2);
+    problemText = max + " - " + min;
+    correctAnswer = max - min;
   }
+
   document.getElementById("problem").textContent = problemText;
 }
 
 function generateExtremeProblem() {
-  let num1 = Math.floor(Math.random() * 12) + 1;  // smaller number for balance
-  let num2 = Math.floor(Math.random() * 12) + 1;
   let op = Math.floor(Math.random() * 4);
   let problemText = "";
 
   if (op === 0) {
+    let num1 = Math.floor(Math.random() * 1000) + 500;
+    let num2 = Math.floor(Math.random() * 500) + 250;
     problemText = num1 + " + " + num2;
     correctAnswer = num1 + num2;
   } else if (op === 1) {
-    problemText = Math.max(num1, num2) + " - " + Math.min(num1, num2);
-    correctAnswer = Math.abs(num1 - num2);
+    let num1 = Math.floor(Math.random() * 1000) + 500;
+    let num2 = Math.floor(Math.random() * 500) + 250;
+    let max = Math.max(num1, num2);
+    let min = Math.min(num1, num2);
+    problemText = max + " - " + min;
+    correctAnswer = max - min;
   } else if (op === 2) {
-    // multiplication with smaller numbers
+    let num1 = Math.floor(Math.random() * 20) + 10;
+    let num2 = Math.floor(Math.random() * 20) + 10;
     problemText = num1 + " * " + num2;
     correctAnswer = num1 * num2;
   } else {
-    // division: create product and divisor to keep result an integer <= 12
-    let divisor = Math.floor(Math.random() * 12) + 1;
-    let quotient = Math.floor(Math.random() * 12) + 1;
+    let divisor = Math.floor(Math.random() * 20) + 2;
+    let quotient = Math.floor(Math.random() * 20) + 2;
     let dividend = divisor * quotient;
     problemText = dividend + " / " + divisor;
     correctAnswer = quotient;
   }
+
   document.getElementById("problem").textContent = problemText;
 }
 
+
 async function sendScore() {
   try {
-    // Get current leaderboard
     let res = await fetch("https://kool.krister.ee/chat/MathProblemGenerator");
     let data = await res.json();
 
     let existingEntry = data.find(entry => entry.username === username);
 
     if (!existingEntry || streak > existingEntry.streak) {
-      // POST new or updated streak (assuming backend updates existing user)
       await fetch("https://kool.krister.ee/chat/MathProblemGenerator", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -153,7 +158,6 @@ async function submitAnswer() {
     feedback.textContent = "Incorrect. Try again!";
     feedback.style.color = "red";
 
-    // Send the score BEFORE resetting the streak
     await sendScore();
     streak = 0;
   }
