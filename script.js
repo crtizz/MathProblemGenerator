@@ -134,7 +134,7 @@ async function getLeaderboard() {
   }
 }
 
-function submitAnswer() {
+async function submitAnswer() {
   let userAnswer = parseInt(document.getElementById("answer").value);
   let feedback = document.getElementById("feedback");
   let streakEl = document.getElementById("streak");
@@ -150,12 +150,13 @@ function submitAnswer() {
     feedback.textContent = "Correct!";
     feedback.style.color = "green";
   } else {
-    streak = 0;
     feedback.textContent = "Incorrect. Try again!";
     feedback.style.color = "red";
-  }
 
-  sendScore();
+    // Send the score BEFORE resetting the streak
+    await sendScore();
+    streak = 0;
+  }
 
   streakEl.textContent = "Current streak: " + streak + "🔥";
 
